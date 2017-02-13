@@ -3,12 +3,14 @@
 #include "Player.hpp"
 #include "Entity.hpp"
 
-class Bomb {
+namespace Map {
+	class Bomb {
 
-private:
-	Player owner;
+	private:
+		Player owner;
 
-};
+	};
+}
 public PlayerEntity Owner{ get; set; }
 public int BombRadius{ get; set; }
 public int BombTimer{ get; set; }
