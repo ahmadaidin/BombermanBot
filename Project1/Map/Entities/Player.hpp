@@ -1,17 +1,16 @@
 #pragma once
 
-#include "Header.h"
-#include "Entity.hpp"
-#include "Location.hpp"
-
+#include "../../Header.h"
+#include "../Entity.hpp"
+#include "../Location.hpp"
 class Player : public Entity {
 public:
 	Player() {
-		Entity();
+		Entity(PLAYER);
 	}
 
 	Player(Location location, string name, char key, int points, int bombBag, int bombRadius) {
-		Entity(location);
+		Entity(PLAYER,location);
 		setName(name);
 		setKey(key);
 		setPoint(points);
@@ -28,6 +27,8 @@ public:
 		setBombag(player.bombBag);
 		setBombRadius(player.bombRadius);
 		setKilled(player.killed);
+
+		return *this;
 	}
 
 	int getPossiblePoint() {
@@ -87,7 +88,7 @@ public:
 	}
 
 	int move(int dx, int dy) {
-		Entity:location.move(dx, dy);
+	Entity:location.move(dx, dy);
 	}
 
 private:

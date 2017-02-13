@@ -1,7 +1,7 @@
 #ifndef Location_HPP
 #define Location_HPP
 
-#include "Header.h"
+#include "../Header.h"
 
 class Location {
 
@@ -29,6 +29,8 @@ public:
 	Location operator= (Location &location) {
 		this->x = location.x;
 		this->y = location.y;
+
+		return *this;
 	}
 
 	void setLocation(int x, int y) {
