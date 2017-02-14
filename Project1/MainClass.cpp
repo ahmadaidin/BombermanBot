@@ -3,17 +3,41 @@
 #include "json.hpp"
 
 using namespace std;
+using namespace nlohmann;
 
-int main() {
-	string filePath = aa;
-	cout << "Reading state file " << filePath + "/" + "state.json" << std::endl;
-
-	return 0;
-}
-/*void readStateFile(string filePath);
+string readStateFile(string filePath);
 void writeMoveFile(string filePath);
 
-int _tmain(int argc, _TCHAR* argv[])
+int main() {
+	string filePath = "roundInfo.json";
+//	cout << "Reading state file state.json" << std::endl;
+	//string jsonString = readStateFile(filePath);
+	json jsonString = readStateFile(filePath);
+//	auto j = R"("+jsonString+")"_json;
+	cout << jsonString["MapSeed"]<< endl;
+	//cout << jsonString["RegisteredPlayerEntities"]<< endl;
+	return 0;
+}
+
+string readStateFile(string filePath)
+{
+	cout << "Reading state file " << filePath  << std::endl;
+	string fileContent;
+	string line;
+	ifstream myfile(filePath);
+
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			fileContent += line += "\n";
+		}
+		myfile.close();
+	}
+
+	return fileContent;
+}
+/*int _tmain(int argc, _TCHAR* argv[])
 {
 	string filePath = argv[2];
 
@@ -24,32 +48,27 @@ int _tmain(int argc, _TCHAR* argv[])
 	readStateFile(filePath);
 	writeMoveFile(filePath);
 	return 0;
-}
+}*/
 
-void readStateFile(string filePath)
+/*string readStateFile(string filePath)
 {
 	cout << "Reading state file " << filePath + "/" + "state.json" << std::endl;
-	cout << "writing state file " << filePath + "/" + "state.txt" << std::endl;
 	string fileContent;
 	string line;
 	ifstream myfile(filePath + "/" + "state.json");
 
-	ofstream outfile(filePath + "/" + "state.txt");
 	if (myfile.is_open())
 	{
 		while (getline(myfile, line))
 		{
 			fileContent += line += "\n";
-
-			if (outfile.is_open()) {
-				outfile << fileContent << std::endl;
-				outfile.close();
-			}
 		}
 		myfile.close();
 	}
-}
 
+	return fileContent;
+}
+*/
 void writeMoveFile(string filePath)
 {
 	cout << "Writing move file " << filePath + "/" + "move.txt" << std::endl;
@@ -65,5 +84,4 @@ void writeMoveFile(string filePath)
 		outfile.close();
 	}
 }
-*/
 
