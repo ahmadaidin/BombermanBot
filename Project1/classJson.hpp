@@ -4,4 +4,9 @@
 
 using namespace nlohmann;
 
-class
+class classJson {
+
+
+private:
+	
+};

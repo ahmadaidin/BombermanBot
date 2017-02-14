@@ -18,6 +18,13 @@ public:
 		}
 	}
 
+	Map operator= (Map &map) {
+		setSeed(map.seed);
+		setHeight(map.height);
+		setWidth(map.width);
+		setBlocks(map.blocks);
+	}
+
 	void fromJson(string map) {
 
 	}

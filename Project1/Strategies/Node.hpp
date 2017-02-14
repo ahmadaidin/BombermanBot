@@ -3,20 +3,31 @@
 #include "../Header.h"
 #include "../Map/Location.hpp"
 #include "../Map/Entity.hpp"
+#include "../Map/Block.hpp"
 
 class Node {
+public:
 	Node() {
 
 	}
 
-	Node(Location location, Entity entity, bool exploading) {
+	Node(Block block) {
+		this->location = block.getLocation();
+		*this->entity = block.getEntity();
+		this->exploading = block.isExploading();
+		*this->bomb = block.getBomb();
+	}
+
+	Node(Location location, Bomb *bomb, Entity *entity, bool exploading) {
 		setLocation(location);
+		setBomb(bomb);
 		setEntity(entity);
 		setExploading(exploading);
 	}
 
-	Node(Location location, Entity entity, bool exploading, vector<Node> neighbors) {
+	Node(Location location, Bomb *bomb, Entity *entity, bool exploading, vector<Node> neighbors) {
 		setLocation(location);
+		setBomb(bomb);
 		setEntity(entity);
 		setExploading(exploading);
 		setNeighbors(neighbors);
@@ -24,6 +35,7 @@ class Node {
 
 	Node(Node &node) {
 		setLocation(node.location);
+		setBomb(node.bomb);
 		setEntity(node.entity);
 		setExploading(node.exploading);
 		setNeighbors(node.neighbors);
@@ -31,6 +43,7 @@ class Node {
 
 	Node operator= (Node &node) {
 		setLocation(node.location);
+		setBomb(node.bomb);
 		setEntity(node.entity);
 		setExploading(node.exploading);
 		setNeighbors(node.neighbors);
@@ -42,7 +55,11 @@ class Node {
 		this->location = location;
 	}
 
-	void setEntity(Entity entity) {
+	void setBomb(Bomb *bomb) {
+		this->bomb = bomb;
+	}
+
+	void setEntity(Entity *entity) {
 		this->entity = entity;
 	}
 
@@ -62,8 +79,12 @@ class Node {
 		return location;
 	}
 
+	Bomb getBomb() {
+		return *bomb;
+	}
+
 	Entity getEntity() {
-		return entity;
+		return *entity;
 	}
 
 	bool isExploading() {
@@ -74,9 +95,18 @@ class Node {
 		return neighbors;
 	}
 
+	int getPoints() {
+		return (entity == NULL ? 0 : entity->getPossiblePoint());
+	}
+
+	bool isBombPresent() {
+		return bomb != NULL;
+	}
+
 private:
 	Location location;
-	Entity entity;
+	Entity *entity;
+	Bomb *bomb;
 	bool exploading;
 	vector<Node> neighbors;
 };

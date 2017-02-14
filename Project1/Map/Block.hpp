@@ -11,11 +11,12 @@ public:
 
 	}
 
-	Block(Location location, Entity entity, Bomb bomb, PowerUp powerUp) {
+	Block(Location location, Entity entity, Bomb bomb, PowerUp powerUp, bool exploading) {
 		this->location = location;
 		this->entity = entity;
 		this->bomb = bomb;
 		this->powerUp = powerUp;
+		this->exploading = exploading;
 	}
 
 	Block(Block &block) {
@@ -23,6 +24,7 @@ public:
 		this->entity = block.entity;
 		this->bomb = block.bomb;
 		this->powerUp = block.powerUp;
+		this->exploading = block.exploading;
 	}
 
 	Block operator= (Block &block) {
@@ -30,6 +32,7 @@ public:
 		this->entity = block.entity;
 		this->bomb = block.bomb;
 		this->powerUp = block.powerUp;
+		this->exploading = block.exploading;
 
 		return *this;
 	}
@@ -50,6 +53,10 @@ public:
 		this->powerUp = powerUp;
 	}
 
+	void setExploading(bool exploading) {
+		this->exploading = exploading;
+	}
+
 	Location getLocation() {
 		return location;
 	}
@@ -66,10 +73,15 @@ public:
 		return powerUp;
 	}
 
+	bool isExploading() {
+		return exploading;
+	}
+
 	
 private:
 	Location location;
 	Entity entity;
 	Bomb bomb;
 	PowerUp powerUp;
+	bool exploading;
 };

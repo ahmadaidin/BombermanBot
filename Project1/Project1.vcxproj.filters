@@ -60,6 +60,12 @@
     <ClInclude Include="Map\Map.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="classJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Strategies\NodeMap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainClass.cpp">
