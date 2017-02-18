@@ -72,9 +72,21 @@
     <ClInclude Include="Map\MapHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputJson\InputJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputJson\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputJson\InputJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputJson\jsoncpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,5 +97,6 @@
     <None Include="state.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="InputJson\state.json" />
   </ItemGroup>
 </Project>

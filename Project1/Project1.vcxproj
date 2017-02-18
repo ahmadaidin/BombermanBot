@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="InputJson\InputJson.hpp" />
+    <ClInclude Include="InputJson\json.h" />
     <ClInclude Include="Map\Block.hpp" />
     <ClInclude Include="Map\Entities\Bomb.hpp" />
     <ClInclude Include="Map\Entities\DestructibleWall.hpp" />
@@ -136,9 +138,12 @@
     <ClInclude Include="Strategies\NodeMap.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InputJson\InputJson.cpp" />
+    <ClCompile Include="InputJson\jsoncpp.cpp" />
     <ClCompile Include="MainClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="InputJson\state.json" />
     <None Include="roundInfo.json" />
     <None Include="state.json" />
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include "../Map/MapHeader.h"
 
 using namespace std;
+using namespace Json;
 
 string ReadJson(string filePath) {
 	cout << "Reading state file " << filePath << endl;
@@ -59,23 +60,24 @@ int MapWidth(Json::Value obj){
 	return obj["MapWidth"].asInt();
 }
 
-void GetAllGameBlock(Json::Value obj){
+vector<vector<Block>> GetAllGameBlock(Json::Value obj){
 	vector<vector<Block>> allBlock;
 	Json::Value B = obj["GameBlocks"];
 
 	for (int i = 0; i < B.size(); i++) {
+		vector<Block> rowBlock;
 		for (int j = 0; j < B[i].size(); j++) {
-			Location blockLocation(i+1, j+1);
-			Block block(blockLocation);
-			Json::Value entity = B[i][j]["Entity"];
-			if (entity.isNull()) {
+			Json::Value jBlock = B[i][j];
+			Block block;
+			Json::Value jEntity = jBlock["Entity"];
+			if (jEntity.isNull()) {
 
 			}
 			else {
-				string type = entity["$type"].asString();
-				Location location(entity["Location"]["X"].asInt(), entity["Location"]["Y"].asInt());
+				string type = jEntity["$type"].asString();
+				Location location(jEntity["Location"]["X"].asInt(), jEntity["Location"]["Y"].asInt());
 				if (type == DES_WALL) {
-					DestructibleWall *destructibleWall= new DestructibleWall(location);
+					DestructibleWall *destructibleWall = new DestructibleWall(location);
 					block.setEntity(destructibleWall);
 				}
 				else if (type == INDES_WALL) {
@@ -84,82 +86,79 @@ void GetAllGameBlock(Json::Value obj){
 				}
 				else if (type == PLAYER) {
 					Player *player = new Player();
-					player->setName(entity["Name"].asString());
-					player->setKey(entity["Key"].asString()[0]);
-					player->setPoint(entity["Points"].asInt());
-					player->setKilled(entity["Killed"].asBool());
-					player->setBombag(entity["BombBag"].asInt());
-					player->setBombRadius(entity["BombRadius"].asInt());
+					player->setName(jEntity["Name"].asString());
+					player->setKey(jEntity["Key"].asString()[0]);
+					player->setPoint(jEntity["Points"].asInt());
+					player->setKilled(jEntity["Killed"].asBool());
+					player->setBombag(jEntity["BombBag"].asInt());
+					player->setBombRadius(jEntity["BombRadius"].asInt());
 					player->setLocation(location);
 
 					block.setEntity(player);
 				}
-				else if (type == SUPER_POW_UP) {
-					SuperPowerUp *superPU = new SuperPowerUp(location);
-					block.setEntity(superPU);
+				else {
+
+				}
+
+			}
+
+			Json::Value jBomb = jBlock["Bomb"];
+			if (jBomb.isNull()) {
+
+			}
+			else {
+				Value jBombOwner = jEntity["Owner"];
+				Location jOwnerLocation(jBombOwner["Location"]["X"].asInt(), jBombOwner["Location"]["Y"].asInt());
+				Player owner;
+				owner.setName(jBombOwner["Name"].asString());
+				owner.setKey(jBombOwner["Key"].asString()[0]);
+				owner.setPoint(jBombOwner["Points"].asInt());
+				owner.setKilled(jBombOwner["Killed"].asBool());
+				owner.setBombag(jBombOwner["BombBag"].asInt());
+				owner.setBombRadius(jBombOwner["BombRadius"].asInt());
+				owner.setLocation(jOwnerLocation);
+
+				int bombRadius = jBomb["BombRadius"].asInt();
+				int bombTimer = jBomb["BombTimer"].asInt();
+				bool isExploding = jBomb["IsExploding"].asBool();
+				Location bombLocation(jBomb["Location"]["X"].asInt(), jBomb["Location"]["Y"].asInt());
+
+
+				Bomb *bomb = new Bomb(bombLocation, owner, bombTimer, isExploding, bombRadius);
+				block.setBomb(bomb);
+			}
+			Value jPowerUp = jBlock["PowerUp"];
+			if (jPowerUp.isNull()) {
+
+			}
+			else {
+				string type = jPowerUp["$type"].asString();
+				Location powerUPLocation(jPowerUp["Location"]["X"].asInt(), jPowerUp["Location"]["Y"].asInt());
+
+				if (type == SUPER_POW_UP) {
+					SuperPowerUp *superPU = new SuperPowerUp(powerUPLocation);
+					block.setPowerUp(superPU);
 				}
 				else if (type == BOMB_BAG_POW_UP) {
-					BombBagPowerUp *bombBagPU = new BombBagPowerUp(location);
-					block.setEntity(bombBagPU);
+					BombBagPowerUp *bombBagPU = new BombBagPowerUp(powerUPLocation);
+					block.setPowerUp(bombBagPU);
 				}
-				else if (type == BOMB_RAD_POW_UP){
-					BombRadiusPowerUp *bombRadiusPU = new BombRadiusPowerUp(location);
-					block.setEntity(bombRadiusPU);
-				}
-				else {
-					
+				else if (type == BOMB_RAD_POW_UP) {
+					BombRadiusPowerUp *bombRadiusPU = new BombRadiusPowerUp(powerUPLocation);
+					block.setPowerUp(bombRadiusPU);
 				}
 			}
+
+			bool exploding = jBlock["Exploding"].asBool();
+			Location blockLocation(jBlock["Location"]["X"].asInt(), jBlock["Location"]["Y"].asInt());
+			block.setExploding(exploding);
+			block.setLocation(blockLocation);
 			
-			/*if (type == "null") {
-
-			}
-			int x1 = B[i]["X"].asInt();
-			int y1 = B[i]["Y"].asInt();
-			Location Loc1(x1,y1);
-
-			Entity entity(Loc1);
-
-			if (!obj["Bomb"].isnull()) {
-				string name = B[i]["Name"].asString();
-				char key = B[i]["Key"].asCString();
-				int points = B[i]["Points"].asInt();
-				bool killed = B[i]["Killed"].asBool();
-				int BombBag= B[i]["BombBag"].asInt();
-				int BombRadius= B[i]["BombRadius"].asInt();
-				int x3 = B[i]["X"].asInt();
-				int y3 = B[i]["Y"].asInt();
-				Location Loc3(x3,y3);
-				Player owner(loc3, name, key, points, BombBag, BombRadius);
-				int BombRadius= B[i]["BombRadius"].asInt();
-				int BombTimer= B[i]["BombTimer"].asInt();
-				bool IsExploding= B[i]["IsExploding"].asBool();
-				int x4 = B[i]["X"].asInt();
-				int y4 = B[i]["Y"].asInt();
-				Location Loc4(x4,y4);
-				Bomb bomb(Loc4, owner, BombTimer, IsExploding, BombRadius);
-			}
-
-			if (!(obj["PowerUp"].isnull())) {
-				string type = B[i]["$type"].asString();
-				int x5 = B[i]["X"].asInt();
-				int y5 = B[i]["Y"].asInt();
-				Location Loc5(x5,y5);
-				PowerUp * powerup(type, Loc5);
-			}
-
-			string P = B[i]["PowerUp"].asString();
-			bool e = B[i]["Exploding"].asBool();
-			int x2= B[i]["X"].asInt();
-			int y2 = B[i]["Y"].asInt();
-			Location Loc2(x2,y2);*/
+			rowBlock.push_back(block);
 		}
+		allBlock.push_back(rowBlock);
 	}
-
-	//Block *b = new Block(Loc2, entity, Bomb, PowerUp);
-	//allBlock.push_back(*b);
-
-	//return allBlock;
+	return allBlock;
 }
 
 double MapSeed(Json::Value obj) {
@@ -172,7 +171,27 @@ int main() {
   Json::Reader reader;
   Json::Value obj;
   reader.parse(str, obj);
-  GetAllGameBlock(obj);
+ 
+  vector<Player> players = getAllPlayer(obj);
+  vector<vector<Block>> blocks = GetAllGameBlock(obj);
+  cout << getCurrentRound(obj) << endl;
+  cout << getPlayerBounty(obj) << endl;
+  cout << MapHeight(obj) << endl;
+  cout << MapWidth(obj) << endl;
+  for (int i = 0; i < players.size(); i++) {
+	  cout << players[i].toString() << endl;
+  }
+  cout << "YELLBOYS" << endl;
+  for (int i = 0; i < blocks.size(); i++) {
+	  for (int j = 0; j < blocks[i].size(); j++) {
+		  if (blocks[i][j].isNullEntity()) {
+
+		  } else {
+			  cout << blocks[i][j].getEntity().getPossiblePoints() << endl;
+			//cout << blocks[i][j].getLocation().getAbsis() << " " << blocks[i][j].getLocation().getOrdinat();
+		  }
+	  }
+  }
   cout<<"Haha"<<endl;
   return 0;
 }

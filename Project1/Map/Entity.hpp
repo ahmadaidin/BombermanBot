@@ -23,12 +23,16 @@ public:
 		return this->location;
 	}
 
-	string toString() {
-		return "";
+	virtual string toString() {
+		return " ";
 	}
 	
-	virtual int getPossiblePoints() {
+	int getPossiblePoints() {
 		return 0;
+	}
+
+	virtual string getType() {
+		return " ";
 	}
 
 private:

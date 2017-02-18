@@ -14,7 +14,7 @@ public:
 	Node(Block block) {
 		this->location = block.getLocation();
 		*this->entity = block.getEntity();
-		this->exploading = block.isExploading();
+		this->exploading = block.isExploding();
 		*this->bomb = block.getBomb();
 	}
 

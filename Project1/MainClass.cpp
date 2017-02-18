@@ -10,87 +10,79 @@ using namespace std;
 //void writeMoveFile(string filePath);
 
 int main() {
-/*	string filePath = "roundInfo.json";
-	cout << "Reading state file state.json" << std::endl;
-	//string jsonString = readStateFile(filePath);
-	json jsonString = readStateFile(filePath);
-	auto j = R"("+jsonString+")"_json;
-	cout << jsonString["MapSeed"]<< endl;
-	//cout << jsonString["RegisteredPlayerEntities"]<< endl;
-	*/
-	
-	vector<Block> blocks;
-	
-	Location l1(1,9); 
-	Location l2(2, 3);
-	Location l3(3, 1);
-	Location l4(4, 9);
-	Location l5(5, 8);
-	Location l6(6, 6);
-	Location l7(7, 4);
-	Location l8(8, 2);
-	Location l9(9, 9);
+	string filePath = "state.json";
 
-/*	BombBagPowerUp *bbpu1= new BombBagPowerUp(l1);
-	BombBagPowerUp *bbpu2= new BombBagPowerUp(*bbpu1);
-	bbpu1->setLocation(l2);
-	SuperPowerUp *spu1= new SuperPowerUp(l3);
-	SuperPowerUp *spu2 = new SuperPowerUp(*spu1);
-	spu2->setLocation(l4);
-	BombRadiusPowerUp *brpu = new BombRadiusPowerUp(l5);
-	Player *p1 = new Player(l6, "Aidin", 'A', 100, 10, 5);
-	Player *p2 = new Player(*p1);
-	p2->setName("Rudi");
-	Bomb *bomb = new Bomb(l7, *p1, 10, 10, 0, 80);
-	DestructibleWall *dw= new DestructibleWall(l8);
-	IndestructibleWall *idw = new IndestructibleWall(l9);*/
+	Map map('A', filePath);
+	int MapHeight = map.MapHeight;
+	int MapWidth = map.MapWidth;
+	double MapSeed = map.MapSeed;
 
-	BombBagPowerUp bbpu1(l1);
-	BombBagPowerUp bbpu2 = bbpu1;
-	bbpu1.setLocation(l2);
-	SuperPowerUp spu1(l3);
-	SuperPowerUp spu2(spu1);
-	spu2.setLocation(l4);
-	BombRadiusPowerUp brpu(l6);
-	Player p1(l6, "Aidin", 'A', 100, 10, 5);
-	Player p2=p1;
-	p2.setName("Rudi");
-	Bomb bomb(l7,p1, 10, 10, 0, 80);
-	DestructibleWall dw(l8);
-	IndestructibleWall idw(l9);
-	
-	cout << bbpu1.toString() << endl;
-	cout << bbpu2.toString() << endl;
-	cout << spu1.toString() << endl;
-	cout << spu2.toString() << endl;
-	cout << brpu.toString() << endl;
-	cout << p1.toString() << endl;
-	cout << p2.toString() << endl;
-	cout << bomb.toString() << endl;
-	cout << dw.toString() << endl;
-	cout << idw.toString() << endl;
+	vector<Player> Players = map.Players;
+	vector<Bomb> Bombs = map.Bombs;
+	vector<vector<string>> Entities = map.Entities;
 
+	vector<Location> EnemiesLoc = map.EnemiesLoc;
+	vector<Location> PowerUpsLoc = map.PowerUpsLoc;
+	vector<Location> IndestructibleWallLoc = map.IndestructibleWallLoc;
+	vector<Location> DestructibleWallsLoc = map.DestructibleWallsLoc;
+	vector<Location> ExplodingLoc = map.ExplodingLoc;
+	vector<Location> BombsLoc = map.BombsLoc;
 
-	Block *b1 = new Block(l1, p1, bomb, brpu, 0);
-	Block b2;
-	b2.setLocation(l2);
-	b2.setExploading(1);
-	Block b3;
-	b3.setLocation(l3);
-	blocks.push_back(*b1);
-	blocks.push_back(b2);
-	cout << b1->getLocation().toString() << endl;
-	cout << b2.getLocation().toString() << endl;
-	cout << b3.getLocation().toString() << endl;
-
-	for (int i = 0; i < blocks.size(); i++) {
-		cout << blocks[i].getLocation().toString() << endl;
+	cout << "===================================" << endl;
+	cout << "All Players" << endl;
+	for (int i = 0; i < Players.size(); i++) {
+		cout << Players[i].toString() << endl;
 	}
 
+	cout << "===================================" << endl;
+	cout << "All Bombs" << endl;	for (int i = 0; i < Bombs.size(); i++) {
+		cout << Bombs[i].toString() << endl;
+	}
 
-	//blocks.push_back(b2);
-	//blocks.push_back(b3);
+	cout << "===================================" << endl;
+	cout << "All Entities" << endl;
+	for (int i = 0; i < Entities.size(); i++) {
+		for (int j = 0; j < Entities[i].size(); j++) {
+			cout << Entities[i][j] << endl;
+		}
+	}
 
+	cout << "===================================" << endl;
+	cout << "All Enemies" << endl;
+	for (int i = 0; i < EnemiesLoc.size(); i++) {
+		cout << EnemiesLoc[i].toString() << endl;
+	}
+
+	cout << "===================================" << endl;
+	cout << "All PowerUps" << endl;
+	for (int i = 0; i < PowerUpsLoc.size(); i++) {
+		cout << PowerUpsLoc[i].toString() << endl;
+	}
+
+	cout << "===================================" << endl;
+	cout << "All Indestructible Wall" << endl;
+	for (int i = 0; i < IndestructibleWallLoc.size(); i++) {
+		cout << IndestructibleWallLoc[i].toString() << endl;
+	}
+	
+	cout << "===================================" << endl;
+	cout << "All Destructible Wall" << endl;
+	for (int i = 0; i < DestructibleWallsLoc.size(); i++) {
+		cout << DestructibleWallsLoc[i].toString() << endl;
+	}
+
+	cout << "===================================" << endl;
+	cout << "All Exploding block" << endl;
+	for (int i = 0; i < ExplodingLoc.size(); i++) {
+		cout << ExplodingLoc[i].toString() << endl;
+	}
+
+	cout << "===================================" << endl;
+	cout << "All Bombs" << endl;
+	for (int i = 0; i < BombsLoc.size(); i++) {
+		cout << BombsLoc[i].toString() << endl;
+	}
+	
 	return 0;
 }
 

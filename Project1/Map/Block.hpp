@@ -11,12 +11,16 @@ public:
 
 	}
 
-	Block(Location location, Entity entity, Bomb bomb, PowerUp powerUp, bool exploading) {
+	Block(Location location) {
+		this->location = location;
+	}
+
+	Block(Location location, Entity *entity, Bomb *bomb, PowerUp *powerUp, bool exploading) {
 		this->location = location;
 		this->entity = entity;
 		this->bomb = bomb;
 		this->powerUp = powerUp;
-		this->exploading = exploading;
+		this->exploding = exploding;
 	}
 
 	Block(const Block &block) {
@@ -24,7 +28,7 @@ public:
 		this->entity = block.entity;
 		this->bomb = block.bomb;
 		this->powerUp = block.powerUp;
-		this->exploading = block.exploading;
+		this->exploding = block.exploding;
 	}
 
 	Block& operator= (Block &block) {
@@ -32,7 +36,7 @@ public:
 		this->entity = block.entity;
 		this->bomb = block.bomb;
 		this->powerUp = block.powerUp;
-		this->exploading = block.exploading;
+		this->exploding = block.exploding;
 
 		return *this;
 	}
@@ -41,20 +45,20 @@ public:
 		this->location = location;
 	}
 
-	void setEntity(Entity entity) {
+	void setEntity(Entity *entity) {
 		this->entity = entity;
 	}
 
-	void setBomb(Bomb bomb) {
+	void setBomb(Bomb *bomb) {
 		this->bomb = bomb;
 	}
 
-	void setPowerUp(PowerUp powerUp) {
+	void setPowerUp(PowerUp *powerUp) {
 		this->powerUp = powerUp;
 	}
 
-	void setExploading(bool exploading) {
-		this->exploading = exploading;
+	void setExploding(bool exploding) {
+		this->exploding = exploding;
 	}
 
 	Location getLocation() {
@@ -62,26 +66,38 @@ public:
 	}
 
 	Entity getEntity() {
-		return entity;
+		return *entity;
 	}
 
 	Bomb getBomb() {
-		return bomb;
+		return *bomb;
 	}
 
 	PowerUp getPowerUp() {
-		return powerUp;
+		return *powerUp;
 	}
 
-	bool isExploading() {
-		return exploading;
+	bool isExploding() {
+		return exploding;
+	}
+
+	bool isNullEntity() {
+		return (entity == NULL);
+	}
+
+	bool isNullBomb() {
+		return (bomb == NULL);
+	}
+
+	bool isNullPowerUp() {
+		return (powerUp == NULL);
 	}
 
 
 private:
 	Location location;
-	Entity entity;
-	Bomb bomb;
-	PowerUp powerUp;
-	bool exploading;
+	Entity *entity;
+	Bomb *bomb;
+	PowerUp *powerUp;
+	bool exploding;
 };

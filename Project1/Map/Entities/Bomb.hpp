@@ -8,21 +8,19 @@ public:
 	Bomb() {
 	}
 
-	Bomb(Location location, Player owner, int timer, int radius, bool isExploding, int Points) {
+	Bomb(Location location, Player owner, int timer, int radius, bool isExploding) {
 		setLocation(location);
 		setOwner(owner);
 		setTimer(timer);
 		setRadius(radius);
 		setExploding(isExploding);
-		setPoints(Points);
 	}
 
 	Bomb(Bomb const &bomb) {
 		setOwner(bomb.owner);
 		setTimer(bomb.timer);
 		setRadius(bomb.radius);
-		setExploding(bomb.isExploading);
-		setPoints(bomb.points);
+		setExploding(bomb.isExploding);
 	}
 
 	Bomb& operator= (const Bomb &bomb) {
@@ -30,8 +28,7 @@ public:
 		setOwner(bomb.owner);
 		setTimer(bomb.timer);
 		setRadius(bomb.radius);
-		setExploding(bomb.isExploading);
-		setPoints(bomb.points);
+		setExploding(bomb.isExploding);
 
 		return *this;
 	}
@@ -53,11 +50,7 @@ public:
 	}
 
 	void setExploding(bool isExploding) {
-		this->isExploading = isExploding;
-	}
-
-	void setPoints(int points) {
-		this->points = points;
+		this->isExploding = isExploding;
 	}
 
 	Player getOwner() {
@@ -73,13 +66,8 @@ public:
 	}
 
 	bool getExploading() {
-		return isExploading;
+		return isExploding;
 	}
-
-	int getPoints() {
-		return points;
-	}
-
 
 	string toString() {
 		return "{Bomb}(X:{"+std::to_string(getLocation().getAbsis())+"}, Y : {"+ to_string(getLocation().getOrdinat())+"}), Raduis : {"+ to_string(getRadius())+"}, Timer : {"+to_string(getTimer())+"}, Owner : {"+getOwner().getKey()+"}";
@@ -89,6 +77,5 @@ private:
 	Player owner;
 	int timer;
 	int radius;
-	bool isExploading;
-	int points;
+	bool isExploding;
 };
