@@ -5,6 +5,7 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
+#define quote(x) #x
 
 #define BOMB "bomb"
 #define PLAYER "player"

@@ -2,15 +2,15 @@
 
 #include "../../Header.h"
 #include "../Entity.hpp"
-#include "../Location.hpp"
+
 class Player : public Entity {
 public:
 	Player() {
-		Entity(PLAYER);
+		
 	}
 
 	Player(Location location, string name, char key, int points, int bombBag, int bombRadius) {
-		Entity(PLAYER,location);
+		setLocation(location);
 		setName(name);
 		setKey(key);
 		setPoint(points);
@@ -19,8 +19,8 @@ public:
 		setKilled(false);
 	}
 
-	Player operator= (Player &player) {
-		Entity:setLocation(player.location);
+	Player& operator= (const Player &player) {
+		super:operator= (player);
 		setName(player.name);
 		setKey(player.key);
 		setPoint(player.points);
@@ -59,7 +59,7 @@ public:
 		this->bombBag = bombBag;
 	}
 
-	void setBombRadius(int bomRadius) {
+	void setBombRadius(int bombRadius) {
 		this->bombRadius = bombRadius;
 	}
 
@@ -86,9 +86,10 @@ public:
 	int isKilled() {
 		return killed;
 	}
+	
 
-	int move(int dx, int dy) {
-	Entity:location.move(dx, dy);
+	string toString() {
+		return "{Player}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "}), Key:{" + getKey() + "})";
 	}
 
 private:

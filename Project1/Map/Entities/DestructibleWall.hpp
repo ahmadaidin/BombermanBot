@@ -6,23 +6,27 @@ class DestructibleWall : public Entity {
 public:
 
 	DestructibleWall() {
-		Entity(DES_WALL);
+	
 	}
 
 	DestructibleWall(Location location) {
-		Entity(DES_WALL,location);
+		setLocation(location);
 	}
 
 	~DestructibleWall() {
 
 	}
 
-	DestructibleWall operator = (DestructibleWall wall) {
-		Entity:setLocation(wall.location);
+	DestructibleWall& operator = (DestructibleWall &wall) {
+		super:operator=(wall);
 		return *this;
 	}
 
 	int getPossiblePoints() {
 		return 30;
+	}
+
+	string toString() {
+		return "{DestructibleWall}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "})";
 	}
 };

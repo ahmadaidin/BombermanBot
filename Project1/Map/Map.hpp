@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../header.h""
+#include "../header.h"
 #include "../Map/Block.hpp"
 #include "../json.hpp"
 
 class Map {
-public:
+/*public:
 	Map() {
 
 	}
@@ -13,16 +13,17 @@ public:
 	Map(int seed, int height, int width) {
 		blocks = vector<vector<Block>>(height);
 		for (int i = 0; i < height; i++) {
-			vector<Block> row = vector<Block>(width);
+			vector<Block> row(width);
 			blocks.push_back(row);
 		}
 	}
 
-	Map operator= (Map &map) {
+	Map& operator= (Map &map) {
 		setSeed(map.seed);
 		setHeight(map.height);
 		setWidth(map.width);
 		setBlocks(map.blocks);
+		return *this;
 	}
 
 	void fromJson(string map) {
@@ -46,8 +47,8 @@ public:
 	}
 
 	void setBlocks(vector<vector<Block>> blocks) {
-		this->blocks = vector<vector<Block>> (blocks.size);
-		for (int i = 0; i < blocks.size; i++) {
+		this->blocks = vector<vector<Block>> (blocks.size());
+		for (int i = 0; i < blocks.size(); i++) {
 			this->blocks[i]=blocks[i];
 		}
 	}
@@ -72,5 +73,5 @@ private:
 	int seed;
 	int height;
 	int width;
-	vector<vector<Block>> blocks;
+	vector<vector<Block>> blocks;*/
 };

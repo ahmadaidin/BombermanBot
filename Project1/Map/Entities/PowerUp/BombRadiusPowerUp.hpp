@@ -4,19 +4,23 @@
 class BombRadiusPowerUp : public PowerUp {
 public:
 	BombRadiusPowerUp() {
-		PowerUp(BOMB_RAD_POW_UP);
 	}
 
 	BombRadiusPowerUp(Location location) {
-		PowerUp(BOMB_RAD_POW_UP, location);
+		setLocation(location);
 	}
 
-	BombRadiusPowerUp  operator= (BombRadiusPowerUp &bombRadiusPowerUp) {
-	PowerUp:setLocation(bombRadiusPowerUp.getLocation());
+	BombRadiusPowerUp&  operator= (BombRadiusPowerUp &bombRadiusPowerUp) {
+	super:operator=(bombRadiusPowerUp);
 		return *this;
 	}
 
 	int getPossiblePoints() {
 		return 50;
+	}
+
+	string toString() {
+		return "{BombRadiusPowerUp}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "})";
+
 	}
 };

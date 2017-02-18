@@ -7,19 +7,23 @@ class IndestructibleWall : public Entity {
 public:
 
 	IndestructibleWall() {
-		Entity(INDES_WALL);
+	
 	}
 
 	IndestructibleWall(Location location) {
-		Entity(INDES_WALL,location);
+		setLocation(location);
 	}
 
 	~IndestructibleWall() {
 
 	}
 
-	IndestructibleWall operator = (IndestructibleWall wall) {
-	Entity:setLocation(wall.location);
+	IndestructibleWall& operator = (IndestructibleWall &wall) {
+	super:operator=(wall);
 		return *this;
+	}
+
+	string toString() {
+		return "{IndestructibleWall}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "})";
 	}
 };

@@ -8,26 +8,11 @@
 class Entity {
 public:
 	Entity() {
-		type = "";
-		this->location = Location(0,0);
+		this->location.setLocation(0, 0);
 	}
 
-	Entity(string type) {
-		this->type =type;
-		this->location = Location(0, 0);
-	}
-
-	Entity(string type, Location location) {
-		this->type = type;
+	Entity(Location location) {
 		this->location = location;
-	}
-
-	void setType(string type) {
-		this->type = type;
-	}
-
-	string getType() {
-		return type;
 	}
 
 	void setLocation(Location location) {
@@ -38,11 +23,16 @@ public:
 		return this->location;
 	}
 
-	virtual int getPossiblePoint();
+	string toString() {
+		return "";
+	}
+	
+	virtual int getPossiblePoints() {
+		return 0;
+	}
 
-protected:
+private:
 	Location location;
-	string type;
 };
 
 #endif

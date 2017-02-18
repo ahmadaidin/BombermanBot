@@ -26,7 +26,7 @@ public:
 		this->y = 0;
 	}
 
-	Location operator= (Location &location) {
+	Location& operator= (Location &location) {
 		this->x = location.x;
 		this->y = location.y;
 
@@ -61,6 +61,10 @@ public:
 	void move(int dx, int dy) {
 		this->x += dx;
 		this->y += dy;
+	}
+
+	string toString() {
+		return "(X:{" + to_string(getAbsis()) + "}, Y:{" + to_string(getOrdinat()) + "}";
 	}
 
 private:

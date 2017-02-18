@@ -4,19 +4,23 @@
 class BombBagPowerUp: public PowerUp {
 public :
 	BombBagPowerUp() {
-		PowerUp(BOMB_BAG_POW_UP);
+		
 	}
 
 	BombBagPowerUp(Location location) {
-		PowerUp(BOMB_BAG_POW_UP, location);
+		setLocation(location);
 	}
 
-	BombBagPowerUp operator= (BombBagPowerUp &bombBagPowerUp) {
-		PowerUp:setLocation(bombBagPowerUp.getLocation());
+	BombBagPowerUp& operator= (BombBagPowerUp &bombBagPowerUp) {
+		super:operator=(bombBagPowerUp);
 		return *this;
 	}
 
 	int getPossiblePoints() {
 		return 50;
+	}
+
+	string toString() {
+		return "{BombBagPowerUp}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "})";
 	}
 };

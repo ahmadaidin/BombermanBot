@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1\Project1.vcxproj", "{8954BD12-76D5-4491-A65F-6BEF7F2545C3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "My Bot", "Project1\Project1.vcxproj", "{8954BD12-76D5-4491-A65F-6BEF7F2545C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8954BD12-76D5-4491-A65F-6BEF7F2545C3}.Debug|x64.ActiveCfg = Debug|x64
 		{8954BD12-76D5-4491-A65F-6BEF7F2545C3}.Debug|x64.Build.0 = Debug|x64
+		{8954BD12-76D5-4491-A65F-6BEF7F2545C3}.Debug|x64.Deploy.0 = Debug|x64
 		{8954BD12-76D5-4491-A65F-6BEF7F2545C3}.Debug|x86.ActiveCfg = Debug|Win32
 		{8954BD12-76D5-4491-A65F-6BEF7F2545C3}.Debug|x86.Build.0 = Debug|Win32
 		{8954BD12-76D5-4491-A65F-6BEF7F2545C3}.Release|x64.ActiveCfg = Release|x64

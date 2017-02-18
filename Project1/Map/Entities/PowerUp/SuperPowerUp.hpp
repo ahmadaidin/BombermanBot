@@ -5,19 +5,23 @@
 class SuperPowerUp : public PowerUp {
 public:
 	SuperPowerUp() {
-		PowerUp(BOMB_RAD_POW_UP);
+
 	}
 
 	SuperPowerUp(Location location) {
-		PowerUp(BOMB_RAD_POW_UP, location);
+		setLocation(location);
 	}
 
 	SuperPowerUp operator= (SuperPowerUp &superPowerUp) {
-	PowerUp:setLocation(superPowerUp.getLocation());
+	super:operator=(superPowerUp);
 		return *this;
 	}
 
 	int getPossiblePoints() {
 		return 100;
+	}
+
+	string toString() {
+		return "{SuperPowerUp}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "})";
 	}
 };

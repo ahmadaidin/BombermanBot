@@ -27,7 +27,7 @@ public:
 		this->exploading = block.exploading;
 	}
 
-	Block operator= (Block &block) {
+	Block& operator= (Block &block) {
 		this->location = block.location;
 		this->entity = block.entity;
 		this->bomb = block.bomb;
@@ -77,7 +77,7 @@ public:
 		return exploading;
 	}
 
-	
+
 private:
 	Location location;
 	Entity entity;
