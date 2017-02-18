@@ -1,12 +1,10 @@
 #include <random>
 #include "stdafx.h"
-#include "json.hpp"
 #include "Map/Entities/EntitiesHeader.h"
 #include "Map/Entities/PowerUp/PowerUpHeader.h"
 #include "Map/MapHeader.h"
 
 using namespace std;
-using namespace nlohmann;
 
 //string readStateFile(string filePath);
 //void writeMoveFile(string filePath);
@@ -21,7 +19,7 @@ int main() {
 	//cout << jsonString["RegisteredPlayerEntities"]<< endl;
 	*/
 	
-	vector<Block> blocks(5);
+	vector<Block> blocks;
 	
 	Location l1(1,9); 
 	Location l2(2, 3);
@@ -61,13 +59,37 @@ int main() {
 	DestructibleWall dw(l8);
 	IndestructibleWall idw(l9);
 	
-	//Block b1(l1, p1, bomb, brpu, 0);
-	//Block b2;
-	//b2.setLocation(l2);
-	//b2.setExploading(1);
-	//Block b3;
-	//b3.setLocation(l3);
+	cout << bbpu1.toString() << endl;
+	cout << bbpu2.toString() << endl;
+	cout << spu1.toString() << endl;
+	cout << spu2.toString() << endl;
+	cout << brpu.toString() << endl;
+	cout << p1.toString() << endl;
+	cout << p2.toString() << endl;
+	cout << bomb.toString() << endl;
+	cout << dw.toString() << endl;
+	cout << idw.toString() << endl;
 
+
+	Block *b1 = new Block(l1, p1, bomb, brpu, 0);
+	Block b2;
+	b2.setLocation(l2);
+	b2.setExploading(1);
+	Block b3;
+	b3.setLocation(l3);
+	blocks.push_back(*b1);
+	blocks.push_back(b2);
+	cout << b1->getLocation().toString() << endl;
+	cout << b2.getLocation().toString() << endl;
+	cout << b3.getLocation().toString() << endl;
+
+	for (int i = 0; i < blocks.size(); i++) {
+		cout << blocks[i].getLocation().toString() << endl;
+	}
+
+
+	//blocks.push_back(b2);
+	//blocks.push_back(b3);
 
 	return 0;
 }

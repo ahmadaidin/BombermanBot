@@ -10,8 +10,8 @@ public:
 		setLocation(location);
 	}
 
-	BombRadiusPowerUp&  operator= (BombRadiusPowerUp &bombRadiusPowerUp) {
-	super:operator=(bombRadiusPowerUp);
+	BombRadiusPowerUp&  operator= (const BombRadiusPowerUp &bombRadiusPowerUp) {
+
 		return *this;
 	}
 

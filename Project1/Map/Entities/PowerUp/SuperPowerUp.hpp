@@ -13,7 +13,6 @@ public:
 	}
 
 	SuperPowerUp operator= (SuperPowerUp &superPowerUp) {
-	super:operator=(superPowerUp);
 		return *this;
 	}
 

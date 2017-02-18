@@ -19,8 +19,16 @@ public:
 		setKilled(false);
 	}
 
+	Player(const Player &player) {
+		setName(player.name);
+		setKey(player.key);
+		setPoint(player.points);
+		setBombag(player.bombBag);
+		setBombRadius(player.bombRadius);
+		setKilled(player.killed);
+	}
+
 	Player& operator= (const Player &player) {
-		super:operator= (player);
 		setName(player.name);
 		setKey(player.key);
 		setPoint(player.points);
@@ -89,7 +97,7 @@ public:
 	
 
 	string toString() {
-		return "{Player}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "}), Key:{" + getKey() + "})";
+		return "{"+getName()+"}(X:{" + to_string(getLocation().getAbsis()) + "}, Y:{" + to_string(getLocation().getOrdinat()) + "}), Key:{" + getKey() + "})";
 	}
 
 private:

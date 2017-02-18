@@ -18,8 +18,7 @@ public:
 
 	}
 
-	IndestructibleWall& operator = (IndestructibleWall &wall) {
-	super:operator=(wall);
+	IndestructibleWall& operator = (const IndestructibleWall &wall) {
 		return *this;
 	}
 

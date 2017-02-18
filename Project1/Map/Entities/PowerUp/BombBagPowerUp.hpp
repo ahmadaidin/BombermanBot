@@ -11,8 +11,8 @@ public :
 		setLocation(location);
 	}
 
-	BombBagPowerUp& operator= (BombBagPowerUp &bombBagPowerUp) {
-		super:operator=(bombBagPowerUp);
+	BombBagPowerUp& operator= (const BombBagPowerUp &bombBagPowerUp) {
+		
 		return *this;
 	}
 

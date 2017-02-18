@@ -2,20 +2,17 @@
 
 #include "../header.h"
 #include "../Map/Block.hpp"
-#include "../json.hpp"
 
 class Map {
-/*public:
+public:
 	Map() {
 
 	}
 
 	Map(int seed, int height, int width) {
-		blocks = vector<vector<Block>>(height);
-		for (int i = 0; i < height; i++) {
-			vector<Block> row(width);
-			blocks.push_back(row);
-		}
+		this->seed = seed;
+		this->height = height;
+		this->width = width;
 	}
 
 	Map& operator= (Map &map) {
@@ -30,7 +27,7 @@ class Map {
 
 	}
 
-	Block getBlock(int x, int y) {
+	Block getBlockAt(int x, int y) {
 		return blocks[x-1][y-1];
 	}
 
@@ -47,9 +44,9 @@ class Map {
 	}
 
 	void setBlocks(vector<vector<Block>> blocks) {
-		this->blocks = vector<vector<Block>> (blocks.size());
+		this->blocks.clear();
 		for (int i = 0; i < blocks.size(); i++) {
-			this->blocks[i]=blocks[i];
+			this->blocks.push_back(blocks[i]);
 		}
 	}
 
@@ -73,5 +70,5 @@ private:
 	int seed;
 	int height;
 	int width;
-	vector<vector<Block>> blocks;*/
+	vector<vector<Block>> blocks;
 };

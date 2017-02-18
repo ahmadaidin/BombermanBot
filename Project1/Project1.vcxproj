@@ -115,7 +115,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="classJson.hpp" />
     <ClInclude Include="Map\Block.hpp" />
     <ClInclude Include="Map\Entities\Bomb.hpp" />
     <ClInclude Include="Map\Entities\DestructibleWall.hpp" />
@@ -138,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainClass.cpp" />
-    <ClCompile Include="json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="roundInfo.json" />

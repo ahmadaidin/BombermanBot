@@ -17,8 +17,16 @@ public:
 		setPoints(Points);
 	}
 
-	Bomb& operator= (Bomb &bomb) {
-		super:operator=(bomb);
+	Bomb(Bomb const &bomb) {
+		setOwner(bomb.owner);
+		setTimer(bomb.timer);
+		setRadius(bomb.radius);
+		setExploding(bomb.isExploading);
+		setPoints(bomb.points);
+	}
+
+	Bomb& operator= (const Bomb &bomb) {
+		//super:operator=(bomb);
 		setOwner(bomb.owner);
 		setTimer(bomb.timer);
 		setRadius(bomb.radius);

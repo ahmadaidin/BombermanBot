@@ -16,7 +16,7 @@ public:
 		this->y = y;
 	}
 
-	Location(Location &L) {
+	Location(const Location &L) {
 		this->x = L.x;
 		this->y = L.y;
 	}
@@ -26,7 +26,7 @@ public:
 		this->y = 0;
 	}
 
-	Location& operator= (Location &location) {
+	Location& operator= (const Location &location) {
 		this->x = location.x;
 		this->y = location.y;
 
@@ -64,7 +64,7 @@ public:
 	}
 
 	string toString() {
-		return "(X:{" + to_string(getAbsis()) + "}, Y:{" + to_string(getOrdinat()) + "}";
+		return "(X:{" + to_string(getAbsis()) + "}, Y:{" + to_string(getOrdinat()) + "})";
 	}
 
 private:

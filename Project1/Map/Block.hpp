@@ -19,7 +19,7 @@ public:
 		this->exploading = exploading;
 	}
 
-	Block(Block &block) {
+	Block(const Block &block) {
 		this->location = block.location;
 		this->entity = block.entity;
 		this->bomb = block.bomb;
