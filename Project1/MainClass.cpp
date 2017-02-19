@@ -121,7 +121,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	char playerKey = argv[1][0];
 	string inputFile = filePath + "/"+"state.json";
 	string outputFile = filePath + "/" + "move.txt";
-	GreedyStrategy greedy(playerKey, filePath);
+	GreedyStrategy greedy(playerKey, inputFile);
 	int decision = greedy.getDecision();
 	writeMoveFile(outputFile, decision);
 	return 0;

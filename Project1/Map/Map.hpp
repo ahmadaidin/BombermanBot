@@ -19,6 +19,7 @@ public:
 
 	void setMap(char myKey, string filePath) {
 		this->MyKey = myKey;
+
 		string str = ReadJson(filePath);
 		Json::Reader reader;
 		Json::Value obj;
