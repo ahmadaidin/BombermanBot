@@ -31,10 +31,10 @@ public:
 			string name = REP[i]["Name"].asString();
 			char key = REP[i]["Key"].asString()[0];
 			int points = REP[i]["Points"].asInt();
-			int BombBag = REP[i]["BombBag"].asInt();
+			BombBag = REP[i]["BombBag"].asInt();
 			int BombRadius = REP[i]["BombRadius"].asInt();
-			int x = REP[i]["Location"]["X"].asInt();
-			int y = REP[i]["Location"]["Y"].asInt();
+			int x = REP[i]["Location"]["X"].asInt()-1;
+			int y = REP[i]["Location"]["Y"].asInt()-1;
 			Location location(x, y);
 			Player p(location, name, key, points, BombBag, BombRadius);
 			Players.push_back(p);
@@ -54,7 +54,7 @@ public:
 				}
 				else {
 					string type = jEntity["$type"].asString();
-					Location location(jEntity["Location"]["X"].asInt(), jEntity["Location"]["Y"].asInt());
+					Location location(jEntity["Location"]["X"].asInt()-1, jEntity["Location"]["Y"].asInt()-1);
 					if (type == DES_WALL) {
 						entity = DES_WALL;
 						DestructibleWallsLoc.push_back(location);
@@ -65,7 +65,7 @@ public:
 					}
 					else if (type == PLAYER) {
 						string key = (jEntity["Key"].asString());
-						entity = key;
+						entity = PLAYER;
 						if (MyKey != key[0]) {
 							EnemiesLoc.push_back(location);
 						}
@@ -76,7 +76,6 @@ public:
 					else {
 
 					}
-
 				}
 
 				Json::Value jBomb = jBlock["Bomb"];
@@ -86,12 +85,12 @@ public:
 				else {
 					entity = BOMB;
 					Value jBombOwner = jEntity["Owner"];
-					Location jOwnerLocation(jBombOwner["Location"]["X"].asInt(), jBombOwner["Location"]["Y"].asInt());
+					Location jOwnerLocation(jBombOwner["Location"]["X"].asInt()-1, jBombOwner["Location"]["Y"].asInt()-1);
 					Player owner;
 					int bombRadius = jBomb["BombRadius"].asInt();
 					int bombTimer = jBomb["BombTimer"].asInt();
 					bool isExploding = jBomb["IsExploding"].asBool();
-					Location bombLocation(jBomb["Location"]["X"].asInt(), jBomb["Location"]["Y"].asInt());
+					Location bombLocation(jBomb["Location"]["X"].asInt()-1, jBomb["Location"]["Y"].asInt()-1);
 					Bomb bomb(bombLocation, owner, bombTimer, isExploding, bombRadius);
 					Bombs.push_back(bomb);
 					BombsLoc.push_back(bombLocation);
@@ -103,14 +102,15 @@ public:
 				}
 				else {
 					string type = jPowerUp["$type"].asString();
-					Location powerUPLocation(jPowerUp["Location"]["X"].asInt(), jPowerUp["Location"]["Y"].asInt());
+					Location powerUPLocation(jPowerUp["Location"]["X"].asInt()-1, jPowerUp["Location"]["Y"].asInt()-1);
 					PowerUpsLoc.push_back(powerUPLocation);
 				}
-				Location blockLocation(jBlock["Location"]["X"].asInt(), jBlock["Location"]["Y"].asInt());
+				Location blockLocation(jBlock["Location"]["X"].asInt()-1, jBlock["Location"]["Y"].asInt()-1);
 				bool exploding = jBlock["Exploding"].asBool();
 				if (exploding) {
 					ExplodingLoc.push_back(blockLocation);
 				}
+
 				rowBlock.push_back(entity);
 			}
 			Entities.push_back(rowBlock);
@@ -134,11 +134,13 @@ public:
 	}
 
 	
+	
 
 	char MyKey;
 	int Height = 21;
 	int Width = 21;
 	double MapSeed;
+	int BombBag;
 
 	
 	vector<Player> Players;

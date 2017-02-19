@@ -12,154 +12,106 @@ public:
 		location = map.MyLocation;
 	}
 
-	vector<Location> getSurroundLocations() {
+	vector<Location> getSurroundLocations(Location location) {
 		vector<Location> surroundLocations;
 
 		if (location.getAbsis() == 0) {
-			//absis = 0
+			//sisi kiri
 			if (location.getOrdinat() == 0) {
 				//pojok kiri atas
 				surroundLocations.push_back(location.getRight());
-				surroundLocations.push_back(location.getRightDown());
+			//	surroundLocations.push_back(location.getRightDown());
 				surroundLocations.push_back(location.getDown());
 			}
 			else if (location.getOrdinat() == map.Height - 1) {
 				//pojok kiri bawah
 				surroundLocations.push_back(location.getUp());
-				surroundLocations.push_back(location.getRightUp());
+				//surroundLocations.push_back(location.getRightUp());
 				surroundLocations.push_back(location.getRight());
 			}
 			else {
-				//sisi kiri
+				//sisi kiri tengah
 				surroundLocations.push_back(location.getUp());
-				surroundLocations.push_back(location.getRightUp());
+				//surroundLocations.push_back(location.getRightUp());
 				surroundLocations.push_back(location.getRight());
-				surroundLocations.push_back(location.getRightDown());
+				//surroundLocations.push_back(location.getRightDown());
 				surroundLocations.push_back(location.getDown());
 			}
 		}
 		else if (location.getAbsis() == map.Width - 1) {
-			//absis == map.width -1 
+			//absis == sisi kanan 
 			if (location.getOrdinat() == 0) {
 				//pojok kanan atas
 				surroundLocations.push_back(location.getLeft());
-				surroundLocations.push_back(location.getLeftDown());
+				//surroundLocations.push_back(location.getLeftDown());
 				surroundLocations.push_back(location.getDown());
 			}
 			else if (location.getOrdinat() == map.Height - 1) {
 				//pojok kanan bawah
 				surroundLocations.push_back(location.getUp());
-				surroundLocations.push_back(location.getLeftUp());
+				//surroundLocations.push_back(location.getLeftUp());
 				surroundLocations.push_back(location.getLeft());
 			}
 			else {
-				//sisi kanan
+				//sisi kanan tengah
 				surroundLocations.push_back(location.getUp());
-				surroundLocations.push_back(location.getLeftUp());
+				//surroundLocations.push_back(location.getLeftUp());
 				surroundLocations.push_back(location.getLeft());
-				surroundLocations.push_back(location.getLeftDown());
+				//surroundLocations.push_back(location.getLeftDown());
 				surroundLocations.push_back(location.getDown());
 			}
-
 		}
 		else {
-			//0< absis < map.width-1
+			//bagian tengah
 			if (location.getOrdinat() == 0) {
-				//sisi atas
+				//sisi atas tengah
 				surroundLocations.push_back(location.getLeft());
-				surroundLocations.push_back(location.getLeftDown());
+				//surroundLocations.push_back(location.getLeftDown());
 				surroundLocations.push_back(location.getDown());
-				surroundLocations.push_back(location.getRightDown());
+				//surroundLocations.push_back(location.getRightDown());
 				surroundLocations.push_back(location.getRight());
 			}
 			else if (location.getOrdinat() == map.Height - 1) {
-				//sisi bawah
+				//sisi bawah tengah
 				surroundLocations.push_back(location.getLeft());
-				surroundLocations.push_back(location.getLeftUp());
+				//surroundLocations.push_back(location.getLeftUp());
 				surroundLocations.push_back(location.getUp());
-				surroundLocations.push_back(location.getRightUp());
+				//surroundLocations.push_back(location.getRightUp());
 				surroundLocations.push_back(location.getRight());
 			}
 			else {
 				//tengah-tengah
 				surroundLocations.push_back(location.getUp());
-				surroundLocations.push_back(location.getRightUp());
+				//surroundLocations.push_back(location.getRightUp());
 				surroundLocations.push_back(location.getRight());
-				surroundLocations.push_back(location.getRightDown());
+				//surroundLocations.push_back(location.getRightDown());
 				surroundLocations.push_back(location.getDown());
-				surroundLocations.push_back(location.getLeftDown());
+				//surroundLocations.push_back(location.getLeftDown());
 				surroundLocations.push_back(location.getLeft());
-				surroundLocations.push_back(location.getLeftUp());
+				//surroundLocations.push_back(location.getLeftUp());
 			}
 		}
+		//surroundLocations.push_back(location);
 		return surroundLocations;
 	}
 
-	vector<Location> getPossibleNextLoc() {
+	vector<Location> getPossibleNextLoc(Location location) {
 		vector<Location> locations;
-		if (location.getAbsis() == 0) {
-			//absis = 0
-			if (location.getOrdinat() == 0) {
-				//pojok kiri atas
-				locations.push_back(location.getRight());
-				locations.push_back(location.getDown());
-			}
-			else if (location.getOrdinat() == map.Height - 1) {
-				//pojok kiri bawah
-				locations.push_back(location.getUp());
-				locations.push_back(location.getRight());
-			}
-			else {
-				//sisi kiri
-				locations.push_back(location.getUp());
-				locations.push_back(location.getRight());
-				locations.push_back(location.getDown());
-			}
-		}
-		else if (location.getAbsis() == map.Width - 1) {
-			//absis == map.width -1 
-			if (location.getOrdinat() == 0) {
-				//pojok kanan atas
-				locations.push_back(location.getLeft());
-				locations.push_back(location.getDown());
-			}
-			else if (location.getOrdinat() == map.Height - 1) {
-				//pojok kanan bawah
-				locations.push_back(location.getUp());
-				locations.push_back(location.getLeft());
-			}
-			else {
-				//sisi kanan
-				locations.push_back(location.getUp());
-				locations.push_back(location.getLeft());
-				locations.push_back(location.getDown());
-			}
-
-		}
-		else {
-			//0< absis < map.width-1
-			if (location.getOrdinat() == 0) {
-				//sisi atas
-				locations.push_back(location.getLeft());
-				locations.push_back(location.getDown());
-				locations.push_back(location.getRight());
-			}
-			else if (location.getOrdinat() == map.Height - 1) {
-				//sisi bawah
-				locations.push_back(location.getLeft());
-				locations.push_back(location.getUp());
-				locations.push_back(location.getRight());
-			}
-			else {
-				//tengah-tengah
-				locations.push_back(location.getUp());
-				locations.push_back(location.getRight());
-				locations.push_back(location.getDown());
-				locations.push_back(location.getLeft());
-			}
+		vector<Location> surroundLocations = getSurroundLocations(location);
+		for (int i = 0; i < surroundLocations.size(); i++) {
+			Location surLoc = surroundLocations[i];
+			//if (location.getDirection(surroundLocations[i]) != DIAGONAL) {
+				if (map.Entities[surLoc.getAbsis()][surLoc.getOrdinat()] != INDES_WALL
+					&& map.Entities[surLoc.getAbsis()][surLoc.getOrdinat()] != DES_WALL
+					&& map.Entities[surLoc.getAbsis()][surLoc.getOrdinat()] != BOMB
+					&& map.Entities[surLoc.getAbsis()][surLoc.getOrdinat()] != PLAYER)
+				{
+					locations.push_back(surLoc);
+				}
+			//}
 		}
 
-		for (int i = 0; i<locations.size(); i++) {
+/*		for (int i = 0; i<locations.size(); i++) {
 			if (map.Entities[locations[i].getAbsis()][locations[i].getOrdinat()] == INDES_WALL
 				|| map.Entities[locations[i].getAbsis()][locations[i].getOrdinat()] == DES_WALL
 				|| map.Entities[locations[i].getAbsis()][locations[i].getOrdinat()] == BOMB
@@ -167,12 +119,16 @@ public:
 			{
 				locations.erase(locations.begin() + i);
 			}
-		}
+		}*/
 		return locations;
 	}
 
-	vector<Bomb> getSurroundBombs() {
-		vector<Location> surroundLocations = getSurroundLocations();
+	bool isBuntu(Location nextLocation) {
+		return getFeasibleNextLocation(nextLocation).size() == 0;
+	}
+
+	vector<Bomb> getSurroundBombs(Location location) {
+		vector<Location> surroundLocations = getSurroundLocations(location);
 		vector<Bomb> surroundBombs;
 		for (int i = 0; i<surroundLocations.size(); i++) {
 			Location l = surroundLocations[i];
@@ -186,9 +142,9 @@ public:
 		return surroundBombs;
 	}
 
-	vector<Location> getSurroundBombsLoc() {
+	vector<Location> getSurroundBombsLoc(Location location) {
 		vector<Location> surroundBombsLoc;
-		vector<Location> surroundLocations = getSurroundLocations();
+		vector<Location> surroundLocations = getSurroundLocations(location);
 		for (int i = 0; i<surroundLocations.size(); i++) {
 			if (map.Entities[surroundLocations[i].getAbsis()][surroundLocations[i].getOrdinat()] == BOMB) {
 				Location bombLoc(surroundLocations[i]);
@@ -199,43 +155,43 @@ public:
 	}
 
 
-	vector<Location> getSurroundDesWall() {
+	vector<Location> getSurroundDesWall(Location location) {
 		vector<Location> surroundDesWall;
-		vector<Location> surroundLocations = getSurroundLocations();
+		vector<Location> surroundLocations = getSurroundLocations(location);
 		for (int i = 0; i<surroundLocations.size(); i++) {
-			if (map.Entities[surroundLocations[i].getAbsis()][surroundLocations[i].getOrdinat()] == DES_WALL) {
-				Location wallLoc(surroundLocations[i]);
-				surroundDesWall.push_back(wallLoc);
+			Location surroundLocation = surroundLocations[i];
+			string type = map.Entities[surroundLocation.getAbsis()][surroundLocation.getOrdinat()];
+			if (type == DES_WALL) {
+				surroundDesWall.push_back(surroundLocation);
 			}
 		}
 		return surroundDesWall;
 	}
 
-	vector<Location> getSurroundEnemies() {
+	vector<Location> getSurroundEnemies(Location location) {
 		vector<Location> surroundEnemies;
-		vector<Location> surroundLocations = getSurroundLocations();
+		vector<Location> surroundLocations = getSurroundLocations(location);
 		for (int i = 0; i<surroundLocations.size(); i++) {
 			if (map.Entities[surroundLocations[i].getAbsis()][surroundLocations[i].getOrdinat()] == PLAYER) {
-				Location EnemiesLoc(surroundLocations[i]);
-				surroundEnemies.push_back(EnemiesLoc);
+				Location enemiesLoc = surroundLocations[i];
+				surroundEnemies.push_back(enemiesLoc);
 			}
 		}
 		return surroundEnemies;
 	}
 
 
-	Location getTarget() {
+	Location getTarget(Location location) {
 		if (map.PowerUpsLoc.size() == 0) {
 			return location.getNearestLocation(map.EnemiesLoc);
 		}
 		else {
-
 			Location nearestEnemyLoc = location.getNearestLocation(map.EnemiesLoc);
 			Location nearestPowerUpLoc = location.getNearestLocation(map.PowerUpsLoc);
 
 			float distance1 = location.getDistance(nearestEnemyLoc);
 			float distance2 = location.getDistance(nearestPowerUpLoc);
-			if (distance1 >= distance2) {
+			if (distance1 <= distance2) {
 				return nearestPowerUpLoc;
 			}
 			else {
@@ -244,55 +200,120 @@ public:
 		}
 	}
 
-	vector<Location> getFeasibleNextLocation() {
-		vector<Location> possibleNextLoc = getPossibleNextLoc();
+	vector<Location> getFeasibleNextLocation(Location location) {
+		vector<Location> possibleNextLoc = getPossibleNextLoc(location);
 		vector<Location> feasibleNextLoc;
-		for (int i = 0; i<possibleNextLoc.size(); i++) {
-			Location possNextLoc = possibleNextLoc[i];
-			vector<Bomb> bombs = getSurroundBombs();
-			if (bombs.size() == 0) {
-				feasibleNextLoc.push_back(possNextLoc);
+		vector<Location> bombNearToMe = getSurroundBombsLoc(location);
+		bool isBombInMyLoc = (map.Entities[location.getAbsis()][location.getOrdinat()] == BOMB);
+
+		if (isBombInMyLoc) {
+			for (int i = 0; i < possibleNextLoc.size(); i++) {
+				Location possNextLoc = possibleNextLoc[i];
+				if (!isBuntu(possNextLoc)) {
+					feasibleNextLoc.push_back(possNextLoc);
+				}
+			}
+		} else if (bombNearToMe.size() != 0) {
+			for (int i = 0; i < possibleNextLoc.size(); i++) {
+				Location possNextLoc = possibleNextLoc[i];
+				//if (!isBuntu(possNextLoc)) {
+					feasibleNextLoc.push_back(possNextLoc);
+				//}
+			}
+			
+			if (feasibleNextLoc.size() != 0) {
+				Location minBombNearLoc = feasibleNextLoc[0];
+				int minBombNear = getSurroundBombsLoc(minBombNearLoc).size();
+				for (int i = 1; i<feasibleNextLoc.size(); i++) {
+					Location bombNearLoc = feasibleNextLoc[i];
+					int numBomNear = getSurroundBombsLoc(bombNearLoc).size();
+					if (numBomNear < minBombNear) {
+						minBombNear = numBomNear;
+						minBombNearLoc = bombNearLoc;
+					}
+				}
+				feasibleNextLoc.clear();
+				feasibleNextLoc.push_back(minBombNearLoc);
+			}
+		}
+		else {
+			for (int i = 0; i<possibleNextLoc.size(); i++) {
+				Location possNextLoc = possibleNextLoc[i];
+				vector<Location> bombsLoc = getSurroundBombsLoc(possNextLoc);
+				if (bombsLoc.size() == 0) {
+					//if (!isBuntu(possNextLoc)) {
+						feasibleNextLoc.push_back(possNextLoc);
+					//}
+				}
 			}
 		}
 		return  feasibleNextLoc;
 	}
 
-	Location getNextStep() {
-		vector<Location> feasibleNextLoc = getFeasibleNextLocation();
+	Location getNextStep(Location location) {
+		vector<Location> feasibleNextLoc = getFeasibleNextLocation(location);
 		if (feasibleNextLoc.size() == 0) {
 			return location;
 		}
 		else {
-			Location targetLocation = getTarget();
+			Location targetLocation = getTarget(location);
 			Location nextStep = targetLocation.getNearestLocation(feasibleNextLoc);
 			return nextStep;
 		}
 	}
 
 	int getDecision() {
-		if (getSurroundDesWall().size() != 0 || getSurroundEnemies().size() != 0) {
-			return PLANT_BOMB;
-		}
-		else {
-			Location nextStep = getNextStep();
-			if (nextStep.isAbove(location)) {
-				return MOVE_UP;
+		vector<Location> surroundDesWall = getSurroundDesWall(location);
+		vector<Location> surroundEnemies = getSurroundEnemies(location);
+		if ( surroundDesWall.size()!= 0 || surroundEnemies.size() != 0) {
+			bool noBombs = true;
+			int i= 0;
+			while (noBombs && i < surroundDesWall.size()) {
+				if (getSurroundBombsLoc(surroundDesWall[i]).size() != 0) {
+					noBombs = false;
+				}
+				i++;
 			}
-			else if (nextStep.isRight(location)) {
-				return MOVE_RIGHT;
+			i = 0;
+			while (noBombs && i < surroundEnemies.size()) {
+				if (getSurroundBombsLoc(surroundEnemies[i]).size() != 0) {
+					noBombs = false;
+				}
+				i++;
 			}
-			else if (nextStep.isBelow(location)) {
-				return MOVE_DOWN;
-			}
-			else if (nextStep.isLeft(location)) {
-				return MOVE_LEFT;
+
+			if (noBombs && map.BombBag>0) {
+				return PLANT_BOMB;
 			}
 			else {
-				return DO_NOTHING;
+				return getStepDecision(location);
 			}
 		}
+		else {
+			return getStepDecision(location);
+		}
 	}
-private:
+
+	int getStepDecision(Location location) {
+		Location nextStep = getNextStep(location);
+		string direction = nextStep.getDirection(location);
+		if (direction == ABOVE) {
+			return MOVE_UP;
+		}
+		else if (direction == RIGHT) {
+			return MOVE_RIGHT;
+		}
+		else if (direction == BELOW) {
+			return MOVE_DOWN;
+		}
+		else if (direction == LEFT) {
+			return MOVE_LEFT;
+		}
+		else {
+			return DO_NOTHING;
+		}
+	}
+
 	Map map;
 	Location location;
 };

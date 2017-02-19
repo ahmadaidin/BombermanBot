@@ -64,42 +64,42 @@ public:
 	}
 
 	Location getLeft() {
-		Location location(x--, y);
+		Location location(x-1, y);
 		return location;
 	}
 
 	Location getRight() {
-		Location location(x++, y);
+		Location location(x+1, y);
 		return location;
 	}
 
 	Location getUp() {
-		Location location(x, y++);
+		Location location(x, y-1);
 		return location;
 	}
 
 	Location getDown() {
-		Location location(x, y--);
+		Location location(x, y+1);
 		return location;
 	}
 
 	Location getLeftUp() {
-		Location location(x--, y--);
+		Location location(x-1, y-1);
 		return location;
 	}
 
 	Location getLeftDown() {
-		Location location(x--, y++);
+		Location location(x-1, y+1);
 		return location;
 	}
 
 	Location getRightUp() {
-		Location location(x++, y--);
+		Location location(x+1, y-1);
 		return location;
 	}
 
 	Location getRightDown() {
-		Location location(x++, y++);
+		Location location(x+1, y+1);
 		return location;
 	}
 
@@ -115,7 +115,7 @@ public:
 
 	Location getNearestLocation(vector<Location> options) {
 		Location nearestLocation = options[0];
-		for (int i = 1; options.size(); i++) {
+		for (int i = 1; i<options.size(); i++) {
 			float distance = getDistance(options[i]);
 			if (getDistance(options[i])<distance) {
 				nearestLocation = options[i];
@@ -124,6 +124,32 @@ public:
 		return nearestLocation;
 	}
 	
+	string getDirection(Location location) {
+		if (x == location.x) {
+			if (y == location.y) {
+				return SAME_LOC;
+			}
+			else if (y < location.y) {
+				return ABOVE;
+			}
+			else {
+				return BELOW;
+			}
+		}
+		else if(x > location.x){
+			if (y == location.y) {
+				return RIGHT;
+			}
+			else return DIAGONAL;
+		}
+		else if (x < location.x) {
+			if (y == location.y) {
+				return LEFT;
+			}
+			else return DIAGONAL;
+		} 
+	}
+
 	bool isAbove(Location location) {
 		return (location.y > y && location.x == x);
 	}

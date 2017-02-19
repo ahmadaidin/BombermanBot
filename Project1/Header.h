@@ -22,6 +22,13 @@
 #define PLANT_BOMB 5
 #define TRIGGER_BOMB 6
 #define DO_NOTHING 7
+#define ABOVE "above"
+#define BELOW "below"
+#define LEFT "left"
+#define RIGHT "right"
+#define SAME_LOC "sameLoc"
+#define DIAGONAL "diagonal"
+
 
 using namespace std;
 #endif // !1
