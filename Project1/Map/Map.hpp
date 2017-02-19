@@ -1,84 +1,9 @@
 #pragma once
 
-/*class Map {
-public:
-	Map() {
-		
-	}
-
-	Map(int seed, int height, int width) {
-		this->seed = seed;
-		this->height = height;
-		this->width = width;
-	}
-
-	Map& operator= (Map &map) {
-		setSeed(map.seed);
-		setHeight(map.height);
-		setWidth(map.width);
-		setBlocks(map.blocks);
-		return *this;
-	}
-
-	void fromJson(string map) {
-
-	}
-
-	Block getBlockAt(int x, int y) {
-		return blocks[x-1][y-1];
-	}
-
-	void setSeed(int seed) {
-		this->seed = seed;
-	}
-
-	void setHeight(int height) {
-		this->height = height;
-	}
-
-	void setWidth(int width) {
-		this->width = width;
-	}
-
-	void setBlocks(vector<vector<Block>> blocks) {
-		this->blocks.clear();
-		for (int i = 0; i < blocks.size(); i++) {
-			this->blocks.push_back(blocks[i]);
-		}
-	}
-
-	int getSeed() {
-		return seed;
-	}
-
-	int getHeight() {
-		return height;
-	}
-
-	int getWidth() {
-		return width;
-	}
-
-	vector<vector<Block>> getBlocks() {
-		return blocks;
-	}
-
-private:
-	int seed;
-	int height;
-	int width;
-	vector<vector<Block>> blocks;
-};
-*/
-
-//#pragma once
-
-
 #include <iostream>
 #include <string>
 #include "../InputJson/json.h"
 #include <fstream>
-//#include "Entities/PowerUp/PowerUpHeader.h"
 #include "Entities/EntitiesHeader.h"
 #include "MapHeader.h"
 
@@ -87,7 +12,12 @@ using namespace Json;
 
 class Map {
 public:
-	Map(char myKey, string filePath) {
+
+	Map() {
+
+	}
+
+	void setMap(char myKey, string filePath) {
 		this->MyKey = myKey;
 		string str = ReadJson(filePath);
 		Json::Reader reader;
@@ -138,6 +68,9 @@ public:
 						if (MyKey != key[0]) {
 							EnemiesLoc.push_back(location);
 						}
+						else {
+							MyLocation = location;
+						}
 					}
 					else {
 
@@ -150,6 +83,7 @@ public:
 
 				}
 				else {
+					entity = BOMB;
 					Value jBombOwner = jEntity["Owner"];
 					Location jOwnerLocation(jBombOwner["Location"]["X"].asInt(), jBombOwner["Location"]["Y"].asInt());
 					Player owner;
@@ -201,14 +135,15 @@ public:
 	
 
 	char MyKey;
-	int MapHeight = 21;
-	int MapWidth = 21;
+	int Height = 21;
+	int Width = 21;
 	double MapSeed;
 
 	
 	vector<Player> Players;
 	vector<Bomb> Bombs;
 	vector<vector<string>> Entities;
+	Location MyLocation;
 
 	vector<Location> EnemiesLoc;
 	vector<Location> PowerUpsLoc;

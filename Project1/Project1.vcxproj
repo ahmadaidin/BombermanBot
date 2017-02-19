@@ -132,6 +132,7 @@
     <ClInclude Include="Map\Location.hpp" />
     <ClInclude Include="Map\Map.hpp" />
     <ClInclude Include="Map\MapHeader.h" />
+    <ClInclude Include="Strategies\GreedyStrategy.hpp" />
     <ClInclude Include="Strategies\Node.hpp" />
     <ClInclude Include="Map\Entities\Player.hpp" />
     <ClInclude Include="stdafx.h" />

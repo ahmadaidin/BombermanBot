@@ -1,14 +1,14 @@
 #include <random>
 #include "stdafx.h"
-#include "Map/Entities/EntitiesHeader.h"
-#include "Map/Entities/PowerUp/PowerUpHeader.h"
-#include "Map/MapHeader.h"
+#include "Strategies\GreedyStrategy.hpp"
 
 using namespace std;
 
 //string readStateFile(string filePath);
-//void writeMoveFile(string filePath);
+ 
+void writeMoveFile(string filePath, int decision);
 
+ /*
 int main() {
 	string filePath = "state.json";
 
@@ -27,6 +27,8 @@ int main() {
 	vector<Location> DestructibleWallsLoc = map.DestructibleWallsLoc;
 	vector<Location> ExplodingLoc = map.ExplodingLoc;
 	vector<Location> BombsLoc = map.BombsLoc;
+
+
 
 	cout << "===================================" << endl;
 	cout << "All Players" << endl;
@@ -86,7 +88,7 @@ int main() {
 	return 0;
 }
 
-
+*/
 
 /*string readStateFile(string filePath)
 {
@@ -106,21 +108,33 @@ int main() {
 
 	return fileContent;
 }
+*/
 
-void writeMoveFile(string filePath)
+int _tmain(int argc, _TCHAR* argv[])
 {
-	cout << "Writing move file " << filePath + "/" + "move.txt" << std::endl;
-	ofstream outfile(filePath + "/" + "move.txt");
+	string filePath = argv[2];
+
+	cout << "Args: " << argc << std::endl;
+	cout << "Player Key: " << argv[1] << std::endl;
+	cout << "File Path: " << argv[2] << std::endl;
+
+	char playerKey = argv[1][0];
+	string inputFile = filePath + "/"+"state.json";
+	string outputFile = filePath + "/" + "move.txt";
+	GreedyStrategy greedy(playerKey, filePath);
+	int decision = greedy.getDecision();
+	writeMoveFile(outputFile, decision);
+	return 0;
+}
+
+void writeMoveFile(string filePath, int decision)
+{
+	cout << "Writing move file " << filePath << std::endl;
+	ofstream outfile(filePath);
 
 	if (outfile.is_open())
 	{
-	//	random_device rd;
-	//	mt19937 rng(rd());
-	//	uniform_int_distribution<int> uni(1, 6);
-	//	outfile << uni(rng) << std::endl;
-		outfile << 4 << std::endl;
+		outfile << decision << std::endl;
 		outfile.close();
 	}
 }
-
-*/
